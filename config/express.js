@@ -4,6 +4,7 @@ var config = require('./config'),
 	morgan = require('morgan'),
 	compress = require('compression'),
 	bodyParser = require('body-parser'),
+	passport = require('passport'),
 	methodOverride = require('method-override');
 
 
@@ -30,6 +31,10 @@ module.exports = function(){
 	app.set('views','./app/views');  //configura direc views
 	app.set('view engine','ejs');
 	//---
+	//autentificación  
+	app.use(passport.initialize());
+	app.use(passport.session());
+	//--
 	require('../app/routes/index.server.routes.js')(app);	
 	require('../app/routes/users.server.routes.js')(app);	
 	//para archivos estaticos
