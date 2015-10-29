@@ -23,7 +23,9 @@ module.exports = function(){
 	app.set('views','./app/views');  //configura direc views
 	app.set('view engine','ejs');
 	//---
-
-	require('../app/routes/index.server.routes.js')(app);
+	require('../app/routes/index.server.routes.js')(app);	
+	//para archivos estaticos
+	app.use(express.static('./public'));
+	//--
 	return app;
 };
