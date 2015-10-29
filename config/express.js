@@ -1,8 +1,10 @@
-var express = require('express');
-var morgan = require('morgan');
-var compress = require('compression');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var config = require('./config'),
+	session = require('express-session'),
+	express = require('express'),
+	morgan = require('morgan'),
+	compress = require('compression'),
+	bodyParser = require('body-parser'),
+	methodOverride = require('method-override');
 
 
 module.exports = function(){
@@ -18,7 +20,12 @@ module.exports = function(){
 
 	app.use(bodyParser.json());
 	app.use(methodOverride());
-
+	//para sesiones
+	app.use(session({
+		saveUninitialized: true,
+		resave:true,
+		secret:config.sessionSecret
+	}));
 	//para nuestro sistema de plantillas
 	app.set('views','./app/views');  //configura direc views
 	app.set('view engine','ejs');
