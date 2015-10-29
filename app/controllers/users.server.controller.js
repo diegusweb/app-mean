@@ -20,7 +20,7 @@ exports.create = function(req, res, next){
 };
 
 exports.list = function(req, res, next){
-	User.find({}, function(err, users){
+	User.find({}, "username email",function(err, users){
 		if(err){
 			return next(err);
 		}else{
@@ -28,3 +28,34 @@ exports.list = function(req, res, next){
 		}
 	});
 };
+
+exports.read = function(req, res){
+	res.json(req.user);
+};
+
+exports.userByID = function(req, res, next, id){
+	User.findOne({
+		_id: id
+	}, function(err, user){
+		if(err){
+			//lama al sihuiente middleware
+			return next(err);
+		}else{
+			//configura la propiedad 'req.user'
+			req.user = user;
+
+			next();
+		}
+	});
+};
+
+
+/*exports.listFind = function(req, res, next){
+	User.find({}, function(err, users){
+		if(err){
+			return next(err);
+		}else{
+			res.json(users);
+		}
+	});
+};*/
