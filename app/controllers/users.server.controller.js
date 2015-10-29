@@ -19,6 +19,16 @@ exports.create = function(req, res, next){
 	});
 };
 
+exports.update = function(req, res, next){
+	User.findByIdAndUpdate(rep.user.id, req.body, function(err, user){
+		if(err){
+			return next(err);
+		}else{
+			res.json(users);
+		}
+	});
+};
+
 exports.list = function(req, res, next){
 	User.find({}, "username email",function(err, users){
 		if(err){
@@ -31,6 +41,16 @@ exports.list = function(req, res, next){
 
 exports.read = function(req, res){
 	res.json(req.user);
+};
+
+exports.delete = function(req, res, next){
+	req.user.remove(function(err){
+		if(err){
+			return next(err);
+		}else{
+			res.json(req.user);
+		}
+	});
 };
 
 exports.userByID = function(req, res, next, id){
