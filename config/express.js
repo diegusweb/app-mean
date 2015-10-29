@@ -15,9 +15,14 @@ module.exports = function(){
 	}
 
 	app.use(bodyParser.urlencoded({ extended: true }));
-	
+
 	app.use(bodyParser.json());
 	app.use(methodOverride());
+
+	//para nuestro sistema de plantillas
+	app.set('views','./app/views');  //configura direc views
+	app.set('view engine','ejs');
+	//---
 
 	require('../app/routes/index.server.routes.js')(app);
 	return app;
