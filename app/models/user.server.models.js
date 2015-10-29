@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	Shema = mongoose.Schema;
+	Schema = mongoose.Schema;
 
 //definimos nuestro user schema
 var UserSchema = new Schema({
